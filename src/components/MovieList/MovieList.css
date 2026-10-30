@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MovieList Component
+   MovieList Component — Enhanced Grid + Elevation
    ========================================================================== */
 
 .movie-list {
@@ -9,12 +9,14 @@
 }
 
 .movie-list__heading {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-3xl);
+  font-weight: 400;
   color: var(--color-text);
   margin-bottom: var(--space-8);
   position: relative;
   padding-bottom: var(--space-4);
+  letter-spacing: 0.02em;
 }
 
 .movie-list__heading::after {
@@ -22,16 +24,17 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 60px;
+  width: 80px;
   height: 3px;
-  background-color: var(--color-primary);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-glow));
   border-radius: var(--radius-full);
+  box-shadow: 0 0 12px var(--color-primary-glow);
 }
 
 .movie-list__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: var(--space-6);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-8);
 }
 
 .movie-list__empty {
@@ -48,11 +51,23 @@
   }
 
   .movie-list__heading {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-2xl);
+    text-align: center;
+  }
+
+  .movie-list__heading::after {
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .movie-list__grid {
     grid-template-columns: 1fr;
-    gap: var(--space-5);
+    gap: var(--space-6);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .movie-list__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

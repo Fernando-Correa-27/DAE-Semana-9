@@ -20,14 +20,22 @@ function Hero({ movie }) {
       />
       <div className="hero__overlay">
         <div className="hero__container">
-          <span className="hero__badge">Destacada</span>
+          <span className="hero__badge">
+            <svg className="hero__badge-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+            </svg>
+            Destacada
+          </span>
           <h2 className="hero__title">{movie.title}</h2>
           <p className="hero__synopsis">{movie.synopsis}</p>
 
           <div className="hero__meta">
             <span className="hero__age-badge">{movie.ageRating}</span>
             <span className="hero__score" aria-label={`Calificación: ${movie.score} de 5`}>
-              &#9733; {movie.score}
+              <svg className="hero__score-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+              </svg>
+              {movie.score}
             </span>
           </div>
 
