@@ -1,0 +1,22 @@
+/* ==========================================================================
+   App Layout & Component Imports
+   ========================================================================== */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.app__main {
+  flex: 1;
+}
+
+/* Import all component styles */
+@import './components/Header/Header.css';
+@import './components/Footer/Footer.css';
+@import './components/Hero/Hero.css';
+@import './components/MovieCard/MovieCard.css';
+@import './components/MovieList/MovieList.css';

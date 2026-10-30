@@ -1,0 +1,144 @@
+/* ==========================================================================
+   Hero Component
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  min-height: 450px;
+  overflow: hidden;
+}
+
+.hero__background {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.hero__overlay {
+  position: relative;
+  z-index: 1;
+  background: var(--color-hero-overlay);
+  padding: var(--space-16) var(--space-6);
+  min-height: 450px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero__badge {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+}
+
+.hero__title {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+}
+
+.hero__synopsis {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 700px;
+  margin-bottom: var(--space-6);
+}
+
+.hero__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.hero__age-badge {
+  display: inline-block;
+  background-color: var(--color-age-badge);
+  color: #fff;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-sm);
+}
+
+.hero__score {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-rating);
+}
+
+.hero__showtimes {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.hero__showtimes-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.hero__showtimes-list {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.hero__showtime-chip {
+  display: inline-block;
+  background-color: var(--color-surface-hover);
+  color: var(--color-text);
+  font-size: var(--font-size-sm);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  transition: background-color var(--transition-fast);
+}
+
+.hero__showtime-chip:hover {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .hero {
+    min-height: 380px;
+  }
+
+  .hero__overlay {
+    padding: var(--space-10) var(--space-4);
+    min-height: 380px;
+  }
+
+  .hero__title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .hero__synopsis {
+    font-size: var(--font-size-sm);
+  }
+}
