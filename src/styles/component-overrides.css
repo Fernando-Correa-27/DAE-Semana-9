@@ -1,5 +1,5 @@
 /* ==========================================================================
-   App Layout & Component Imports
+   App Layout — Estilos del contenedor principal
    ========================================================================== */
 
 .app {
@@ -13,10 +13,3 @@
 .app__main {
   flex: 1;
 }
-
-/* Import all component styles */
-@import './components/Header/Header.css';
-@import './components/Footer/Footer.css';
-@import './components/Hero/Hero.css';
-@import './components/MovieCard/MovieCard.css';
-@import './components/MovieList/MovieList.css';

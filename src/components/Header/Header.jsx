@@ -7,7 +7,7 @@ function Header() {
   return (
     <header className="header">
       <div className="header__container">
-        <div className="header__brand">
+        <div class="header__brand">
           <span className="header__logo" aria-hidden="true">&#9654;</span>
           <h1 className="header__title">Cartelera de Cine</h1>
         </div>
