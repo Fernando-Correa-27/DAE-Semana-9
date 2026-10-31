@@ -256,6 +256,7 @@
   border-color: var(--color-primary);
   transform: translateY(-50%) scale(1.1);
   color: #fff;
+}
 
 .hero__nav--prev {
   left: var(--space-4);

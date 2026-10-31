@@ -88,7 +88,7 @@ function MovieList({
         </div>
 
         <div className="movie-list__filter-row">
-          {genres.length > 0 && (
+          {genres && genres.length > 0 && (
             <select
               className="movie-list__filter-select"
               value={genreFilter}

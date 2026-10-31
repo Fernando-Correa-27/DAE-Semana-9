@@ -62,7 +62,7 @@ function Header({
           </div>
 
           {/* Genre Filter */}
-          {genres.length > 0 && (
+          {genres && genres.length > 0 && (
             <select
               className="header__filter-select"
               value={genreFilter}
