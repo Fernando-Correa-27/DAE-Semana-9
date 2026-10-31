@@ -19,7 +19,7 @@ function MovieCard({ movie }) {
     <article className="movie-card" aria-label={`Película: ${movie.title}`}>
       <div className="movie-card__poster">
         <img
-          src={movie.image}
+          src={movie.poster}
           alt={`Póster de ${movie.title}`}
           loading="lazy"
           className="movie-card__image"
