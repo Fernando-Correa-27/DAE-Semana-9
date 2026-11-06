@@ -1,14 +1,66 @@
 /* ==========================================================================
-   Hero Component — Carousel with Glassmorphism
+   Hero Component — Dynamic Carousel with Fade Transitions & Preloading
    ========================================================================== */
+
+/* ----------------------------------------------------------------------
+   Core Carousel Layout
+   ---------------------------------------------------------------------- */
 
 .hero {
   position: relative;
   min-height: 520px;
   overflow: hidden;
   user-select: none;
+}
+
+/* ----------------------------------------------------------------------
+   Skeleton Loading Layer
+   ---------------------------------------------------------------------- */
+
+.hero__skeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-background, #1a1a2e) 0%,
+    var(--color-surface, #16213e) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.3s ease;
 }
+
+.hero__skeleton--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hero__skeleton-shimmer {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ----------------------------------------------------------------------
+   Background with Fade Transition
+   ---------------------------------------------------------------------- */
 
 .hero__background {
   position: absolute;
@@ -18,12 +70,22 @@
   background-repeat: no-repeat;
   z-index: 0;
   filter: brightness(var(--hero-brightness, 0.6));
-  transition: opacity 0.8s ease-in-out, transform 8s ease-out;
+  transition: opacity var(--transition-slow, 0.8s) ease-in-out, transform 8s ease-out;
+  opacity: 0;
+}
+
+.hero__background--loaded {
+  opacity: 1;
+  animation: heroZoom 8s ease-out forwards;
 }
 
 [data-theme='light'] .hero__background {
   filter: brightness(0.9);
 }
+
+/* ----------------------------------------------------------------------
+   Overlay & Container
+   ---------------------------------------------------------------------- */
 
 .hero__overlay {
   position: relative;
@@ -39,7 +101,12 @@
   max-width: var(--max-width);
   margin: 0 auto;
   width: 100%;
+  position: relative;
 }
+
+/* ----------------------------------------------------------------------
+   Badge
+   ---------------------------------------------------------------------- */
 
 .hero__badge {
   display: inline-flex;
@@ -66,6 +133,10 @@
   fill: currentColor;
 }
 
+/* ----------------------------------------------------------------------
+   Title & Synopsis
+   ---------------------------------------------------------------------- */
+
 .hero__title {
   font-family: var(--font-family-heading);
   font-size: var(--font-size-5xl);
@@ -84,6 +155,10 @@
   margin-bottom: var(--space-4);
   animation: fadeInUp 0.5s ease-out 0.2s both;
 }
+
+/* ----------------------------------------------------------------------
+   Meta Info (age, runtime, score)
+   ---------------------------------------------------------------------- */
 
 .hero__meta {
   display: flex;
@@ -127,6 +202,10 @@
   fill: currentColor;
 }
 
+/* ----------------------------------------------------------------------
+   Genre Tags
+   ---------------------------------------------------------------------- */
+
 .hero__genres {
   display: flex;
   flex-wrap: wrap;
@@ -145,6 +224,10 @@
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
 }
+
+/* ----------------------------------------------------------------------
+   Action Buttons
+   ---------------------------------------------------------------------- */
 
 .hero__actions {
   display: flex;
@@ -196,7 +279,10 @@
   transform: translateY(-2px);
 }
 
-/* Indicators */
+/* ----------------------------------------------------------------------
+   Slide Indicators
+   ---------------------------------------------------------------------- */
+
 .hero__indicators {
   display: flex;
   justify-content: center;
@@ -228,7 +314,10 @@
   border-radius: var(--radius-full);
 }
 
-/* Navigation Arrows */
+/* ----------------------------------------------------------------------
+   Navigation Arrows
+   ---------------------------------------------------------------------- */
+
 .hero__nav {
   position: absolute;
   top: 50%;
@@ -266,16 +355,51 @@
   right: var(--space-4);
 }
 
-/* Focus visible for accessibility */
+/* ----------------------------------------------------------------------
+   Pause Indicator
+   ---------------------------------------------------------------------- */
+
+.hero__pause-indicator {
+  position: absolute;
+  bottom: var(--space-8);
+  right: var(--space-6);
+  background: var(--glass-bg);
+  backdrop-filter: var(--blur-sm);
+  -webkit-backdrop-filter: var(--blur-sm);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  padding: 4px 12px;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  opacity: 0.7;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+/* ----------------------------------------------------------------------
+   Accessibility
+   ---------------------------------------------------------------------- */
+
 .hero__btn:focus-visible,
 .hero__nav:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-/* Reduced motion */
+/* ----------------------------------------------------------------------
+   Reduced Motion
+   ---------------------------------------------------------------------- */
+
 @media (prefers-reduced-motion: reduce) {
   .hero__background {
+    transition: none;
+    animation: none;
+  }
+
+  .hero__background--loaded {
+    opacity: 1;
+  }
+
+  .hero__skeleton {
     animation: none;
     transition: none;
   }
@@ -296,7 +420,10 @@
   }
 }
 
-/* Responsive */
+/* ----------------------------------------------------------------------
+   Responsive
+   ---------------------------------------------------------------------- */
+
 @media (max-width: 768px) {
   .hero {
     min-height: 480px;
@@ -361,9 +488,17 @@
   .hero__nav--next {
     right: var(--space-2);
   }
+
+  .hero__pause-indicator {
+    bottom: var(--space-4);
+    right: var(--space-3);
+  }
 }
 
-/* Animations */
+/* ----------------------------------------------------------------------
+   Animations
+   ---------------------------------------------------------------------- */
+
 @keyframes heroZoom {
   from {
     transform: scale(1);

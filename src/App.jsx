@@ -23,13 +23,8 @@ function App() {
   const featured = useMemo(() => moviesData.find((m) => m.featured) || null, [])
   const list = useMemo(() => moviesData.filter((m) => !m.featured), [])
 
-  // All movies for carousel
-  const carouselMovies = useMemo(() => {
-    const featuredMovies = moviesData.filter((m) => m.featured)
-    if (featuredMovies.length > 0) return featuredMovies
-    // Fallback: use first 3 movies if no featured
-    return moviesData.slice(0, 3)
-  }, [])
+  // All movies for carousel — use first 8 movies for rotation
+  const carouselMovies = useMemo(() => moviesData.slice(0, 8), [])
 
   // Genre list
   const genres = useMemo(() => {
@@ -74,16 +69,25 @@ function App() {
     return () => mediaQuery.removeEventListener('change', handler)
   }, [])
 
-  // Carousel auto-rotation
+  // Carousel auto-rotation — 4 seconds
   useEffect(() => {
     if (carouselMovies.length <= 1) return
 
     const interval = setInterval(() => {
       setHeroIndex((prev) => (prev + 1) % carouselMovies.length)
-    }, 6000)
+    }, 4000)
 
     return () => clearInterval(interval)
   }, [carouselMovies.length])
+
+  // Listen for indicator clicks from Hero
+  useEffect(() => {
+    const handler = (e) => {
+      setHeroIndex(e.detail)
+    }
+    window.addEventListener('heroNavigate', handler)
+    return () => window.removeEventListener('heroNavigate', handler)
+  }, [])
 
   // Pause on page hidden
   useEffect(() => {
@@ -127,6 +131,8 @@ function App() {
 
   const handleTouchStart = useCallback((e) => {
     setTouchStart(e.touches[0].clientX)
+    // Pause carousel on touch
+    document.body.style.setProperty('--carousel-paused', 'true')
   }, [])
 
   const handleTouchMove = useCallback((e) => {
@@ -142,6 +148,8 @@ function App() {
     } else if (distance < -minSwipeDistance) {
       handlePrevSlide()
     }
+    // Resume carousel after swipe
+    document.body.style.setProperty('--carousel-paused', 'false')
     setTouchStart(null)
     setTouchEnd(null)
   }, [touchStart, touchEnd, handleNextSlide, handlePrevSlide])
