@@ -369,7 +369,7 @@
 
 .hero__pause-indicator {
   position: absolute;
-  bottom: var(--space-8);
+  top: var(--space-6);
   right: var(--space-6);
   background: var(--glass-bg);
   backdrop-filter: var(--blur-sm);
