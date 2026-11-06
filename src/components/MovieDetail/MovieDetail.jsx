@@ -1,6 +1,28 @@
 import PropTypes from 'prop-types'
 
 /**
+ * Convert a YouTube watch URL to an embed URL.
+ * Handles the most common URL formats used for YouTube links.
+ */
+function toEmbedUrl(url) {
+  if (!url) return ''
+
+  // Already an embed URL
+  if (url.includes('/embed/')) return url
+
+  // https://www.youtube.com/watch?v=VIDEO_ID
+  const watchMatch = url.match(/[?&]v=([a-zA-Z0-9_-]{11})/)
+  if (watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`
+
+  // https://youtu.be/VIDEO_ID
+  const shortMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/)
+  if (shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`
+
+  // Return as-is if no pattern matches
+  return url
+}
+
+/**
  * MovieDetail — Modal de detalle de película con sinopsis completa y trailer
  */
 function MovieDetail({ movie, onClose }) {
@@ -93,7 +115,7 @@ function MovieDetail({ movie, onClose }) {
                 <h3 className="movie-detail__trailer-heading">Trailer</h3>
                 <div className="movie-detail__trailer-wrapper">
                   <iframe
-                    src={movie.trailer}
+                    src={toEmbedUrl(movie.trailer)}
                     title={`Trailer de ${movie.title}`}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen

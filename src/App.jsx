@@ -7,6 +7,7 @@ import MovieDetail from './components/MovieDetail/MovieDetail'
 import moviesData from './data/cartelera'
 
 import './styles/component-overrides.css'
+import './components/MovieDetail/MovieDetail.css'
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -75,7 +76,7 @@ function App() {
 
     const interval = setInterval(() => {
       setHeroIndex((prev) => (prev + 1) % carouselMovies.length)
-    }, 4000)
+    }, 6000)
 
     return () => clearInterval(interval)
   }, [carouselMovies.length])
