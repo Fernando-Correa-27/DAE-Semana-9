@@ -203,9 +203,9 @@ function Hero({
             </div>
           )}
 
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows — grouped bottom right */}
           {movies.length > 1 && (
-            <>
+            <div className="hero__nav-group">
               <button
                 className="hero__nav hero__nav--prev"
                 onClick={handlePrev}
@@ -220,7 +220,7 @@ function Hero({
               >
                 ›
               </button>
-            </>
+            </div>
           )}
 
           {/* Status: paused indicator */}

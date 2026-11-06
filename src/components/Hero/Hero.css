@@ -319,19 +319,17 @@
    ---------------------------------------------------------------------- */
 
 .hero__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
   z-index: 10;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-full);
   background: var(--glass-bg);
   backdrop-filter: var(--blur-sm);
   -webkit-backdrop-filter: var(--blur-sm);
   border: 1px solid var(--glass-border);
   color: var(--color-text);
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-2xl);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -343,16 +341,26 @@
 .hero__nav:focus-visible {
   background: var(--color-primary);
   border-color: var(--color-primary);
-  transform: translateY(-50%) scale(1.1);
+  transform: scale(1.1);
   color: #fff;
 }
 
-.hero__nav--prev {
-  left: var(--space-4);
+/* Grouped navigation arrows — bottom right of banner */
+.hero__nav-group {
+  position: absolute;
+  bottom: var(--space-10);
+  right: var(--space-6);
+  z-index: 10;
+  display: flex;
+  gap: var(--space-2);
 }
 
-.hero__nav--next {
-  right: var(--space-4);
+.hero__nav-group .hero__nav--prev {
+  order: 1;
+}
+
+.hero__nav-group .hero__nav--next {
+  order: 2;
 }
 
 /* ----------------------------------------------------------------------
@@ -448,6 +456,11 @@
     font-size: var(--font-size-xl);
   }
 
+  .hero__nav-group {
+    bottom: var(--space-8);
+    right: var(--space-4);
+  }
+
   .hero__btn {
     padding: 10px 20px;
     font-size: var(--font-size-sm);
@@ -481,12 +494,9 @@
     font-size: var(--font-size-lg);
   }
 
-  .hero__nav--prev {
-    left: var(--space-2);
-  }
-
-  .hero__nav--next {
-    right: var(--space-2);
+  .hero__nav-group {
+    bottom: var(--space-6);
+    right: var(--space-3);
   }
 
   .hero__pause-indicator {
